@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+    app:
+        container_name: omega-api-photos
+        user: 'node'
+        restart: unless-stopped
+        command: 'npm start'
+        ports:
+            - 5050:5050
+        volumes:
+            - ./:/home/node/app
+        working_dir: /home/node/app
+        image: node:17.2.0-alpine
