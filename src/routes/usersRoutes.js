@@ -7,6 +7,7 @@ router.use(express.json());
 
 router
     .get("/user", UsersController.listUsers)
-    .post("/user", UsersController.addUser);
+    .post("/user", UsersController.addUser)
+    .delete("/user", UsersController.deleteUser);
 
 export default router;

@@ -1,6 +1,7 @@
 import { getAllFiles } from "get-all-files";
 import base64Img from "base64-img";
 import isEmpty from "../helpers/isEmpty.js";
+import fs from "fs";
 
 class UsersController {
     static listUsers = async (req, res) => {
@@ -35,6 +36,19 @@ class UsersController {
             console.log(error);
         }
         res.status(201).json({ message: "Adicionado" });
+    };
+
+    static deleteUser = async (req, res) => {
+        if (isEmpty(req.body)) {
+            return res.status(201).json({ message: "Nenhum valor informado." });
+        }
+        try {
+            let jsonData = JSON.parse(JSON.stringify(req.body));
+            fs.unlinkSync(`photos/${jsonData.name}.png`);
+        } catch (err) {
+            console.error(err);
+        }
+        res.status(201).json({ message: "Removido!" });
     };
 }
 
