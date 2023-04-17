@@ -2,6 +2,7 @@ import { getAllFiles } from "get-all-files";
 import base64Img from "base64-img";
 import isEmpty from "../helpers/isEmpty.js";
 import fs from "fs";
+import axios from "axios";
 
 class UsersController {
     static listUsers = async (req, res) => {
@@ -32,6 +33,14 @@ class UsersController {
                 "photos",
                 jsonData.name
             );
+            axios
+                .get("http://python-api:5000/update-storage")
+                .then(function (response) {
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         } catch (error) {
             console.log(error);
         }
